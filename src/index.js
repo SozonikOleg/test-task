@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers,  applyMiddleware  } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import { SnackbarProvider } from 'notistack';
 import reducers from './redux/reducers';
@@ -8,7 +9,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const store = createStore(combineReducers({ app: reducers }));
+const store = createStore(
+    combineReducers({ app: reducers }),
+    composeWithDevTools(applyMiddleware()),
+);
 
 render(
   <React.StrictMode>
