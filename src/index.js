@@ -1,12 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import { SnackbarProvider } from 'notistack';
+import reducers from './redux/reducers';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
+const store = createStore(combineReducers({ app: reducers }));
+
+render(
   <React.StrictMode>
-    <App />
+      <Provider store={store}>
+          <SnackbarProvider>
+              <App />
+          </SnackbarProvider>
+      </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
